@@ -286,7 +286,7 @@ class MangaProcessor:
 def main():
    parser = argparse.ArgumentParser(description="Manga to kindle Processor with RabbitMQ status updates")
    parser.add_argument('-i', '--manga_id', required=True, help='Manga ID')
-   parser.add_argument('-m', '--manga_name', required=True, htlp='Manga name')
+   parser.add_argument('-m', '--manga_name', required=True, help='Manga name')
    parser.add_argument('-v', '--volume', required=True, help='Volume number')
    parser.add_argument('-s', '--separate_chapter_folder', required=True, help="Separate chapter folder flag (Y/N)")
    parser.add_argument('-p', '--job_number', required=True, help="Job identifier")
