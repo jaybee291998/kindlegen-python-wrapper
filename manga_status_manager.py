@@ -7,6 +7,7 @@ import re
 import os
 from typing import Dict, Any, Optional
 from datetime import datetime
+from dotenv import load_dotenv
 
 load_dotenv()
 
