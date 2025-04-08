@@ -79,13 +79,13 @@ class RabbitMQManager:
 
 class MangaProcessor:
 
-   def __init__(self):
-    self.rabbitmq = RabbitMQManager()
-    self.rabbitmq.connect()
-    self.current_volume = None
-    self.manga_name = None
-    self.job_number = None
-    self.base_path = os.getenv('MANGA_BASE_PATH', '/home/rootjaybee/manga_to_kindle/kcc')
+    def __init__(self):
+        self.rabbitmq = RabbitMQManager()
+        self.rabbitmq.connect()
+        self.current_volume = None
+        self.manga_name = None
+        self.job_number = None
+        self.base_path = os.getenv('MANGA_BASE_PATH', '/home/rootjaybee/manga_to_kindle/kcc')
 
     def send_status(self, step: str, status: str, details: Dict[str, Any] = None):
         if details is None:
@@ -206,9 +206,10 @@ class MangaProcessor:
         else:
             logger.debug(f"Processing line: {line}")
     
-    def process_manga(self, manga_id: str, manga_name: str, volume_number: str, separate_chapter_folder: str):
+    def process_manga(self, manga_id: str, manga_name: str, volume_number: str, job_number: str, separate_chapter_folder: str):
         self.current_volume = volume_number
         self.manga_name = manga_name
+        self.job_number = job_number
 
         try:
             self.send_status(
@@ -287,7 +288,7 @@ def main():
    parser = argparse.ArgumentParser(description="Manga to kindle Processor with RabbitMQ status updates")
    parser.add_argument('-i', '--manga_id', required=True, help='Manga ID')
    parser.add_argument('-m', '--manga_name', required=True, help='Manga name')
-   parser.add_argument('-v', '--volume', required=True, help='Volume number')
+   parser.add_argument('-v', '--volume_number', required=True, help='Volume number')
    parser.add_argument('-s', '--separate_chapter_folder', required=True, help="Separate chapter folder flag (Y/N)")
    parser.add_argument('-p', '--job_number', required=True, help="Job identifier")
 
